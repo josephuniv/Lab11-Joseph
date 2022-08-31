@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Food Order </h1>
+    </header>
+    <script>
+        function addorder() {
+            if (document.getElementById("n1").value >= 1 && document.getElementById("n1").value <= 5) {
+                if (document.getElementById("c1").checked == true)
+                    p = 8.5;
+                else
+                    p = 5.5;
+
+
+                document.getElementById("p1").innerHTML += "You added item no. ";
+                document.getElementById("p1").innerHTML += document.getElementById("n1").value;
+                if (document.getElementById("c1").checked == true)
+                    document.getElementById("p1").innerHTML += " with meat its price: 8.5 <br>";
+                else
+                    document.getElementById("p1").innerHTML += " without meat its price: 5.5 <br>";
+
+                document.getElementById("t1").value = parseFloat(document.getElementById("t1").value) + p;
+
+                document.getElementById("c1").checked = false;
+                document.getElementById("n1").value = "";
+            }
+            else if (document.getElementById("n1").value == 6 && document.getElementById("p1").innerHTML != "") {
+                alert("Your order submitted, You must pay " + document.getElementById("t1").value + "$ Thank you");
+                document.getElementById("l1").hidden = false;
+                document.getElementById("c1").hidden = false;
+                document.getElementById("c1").checked = false;
+                document.getElementById("n1").value = "";
+                document.getElementById("p1").innerHTML = "";
+                document.getElementById("t1").value = "0";
+                document.getElementById("s1").value = "Add To Order";
+            }
+            if (!document.getElementById("n1").checkValidity())
+                alert(document.getElementById("n1").validationMessage);
+        }
+        function changecheck() {
+            if (!document.getElementById("n1").checkValidity()) {
+                alert(document.getElementById("n1").validationMessage);
+                document.getElementById("n1").value = "";
+
+            }
+
+            if (document.getElementById("n1").value == 6) {
+                document.getElementById("c1").hidden = true;
+                document.getElementById("l1").hidden = true;
+                document.getElementById("s1").value = "Place The Order";
+            }
+            else {
+                document.getElementById("c1").hidden = false;
+                document.getElementById("l1").hidden = false;
+                document.getElementById("s1").value = "Add To Order";
+            }
+        }
+
+    </script>
+
+    <main>
+        <table border="1">
+            <caption><strong>The Menu</strong></caption>
+            <tr>
+                <th>Menu</th>
+                <th>Price without Meat</th>
+                <th>Price with Meat (Yes)</th>
+            </tr>
+            <tr>
+                <td>1.Hamburger</td>
+                <td>$5.5</td>
+                <td>$8.5</td>
+            </tr>
+            <tr>
+                <td>2. Pizza</td>
+                <td>$5.5</td>
+                <td>$8.5</td>
+            </tr>
+            <tr>
+                <td>3. Fish and Chips</td>
+                <td>$5.5</td>
+                <td>$8.5</td>
+            </tr>
+            <tr>
+                <td>4. Salad</td>
+                <td>$5.5</td>
+                <td>$8.5</td>
+            </tr>
+            <tr>
+                <td>5. Sandwich</td>
+                <td>$5.5</td>
+                <td>$8.5</td>
+            </tr>
+            <td>6. Place The Order</td>
+            <td> </td>
+            <td> </td>
+            </tr>
+        </table><br>
+        Your Choise: <input type="number" id="n1" min=1 max=6 onchange="changecheck()">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="l1">With Meat:</label><input type="checkbox" id="c1">
+        <Br><Br>
+        <input type="submit" onclick="addorder()" value="Add To Order" id="s1">
+        <h2>Your order:</h2>
+
+        <p id="p1"></p>
+        <br>
+        Total Price: <input type="text" id="t1" value=0>
+
+    </main>
+</body>
+
+</html>
